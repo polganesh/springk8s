@@ -24,15 +24,19 @@ Althogh applications running on any K8s cluster can run on any k8s platforms e.g
 ```
 mvn clean install -DskipTests
 ```
-it will create jar file in the _target_ folder of this project 
+It will create jar file in the _target_ folder of this project 
 
 ### Build Docker image
 
 ```
 docker build -t $user/poc:dev .
 ```
-it will create docker image based on _Dockerfile_ present in this project.
+- It will create docker image based on _Dockerfile_ present in this project.
+- I have created docker image with name poc and tagged it as dev. you are free to use other names and tags
 
-### 
+### Push docker image to AWS ECR (optional)
+- This step is optional and required only if you are using AWS EKS. 
+- In our case we are using AWS EKS for deploying our application hence it is needed for it.
+- steps for pushing docker image to ECR are available in AWS web console. for more information [refer](https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-push-ecr-image.html)
 
 
