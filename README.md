@@ -35,7 +35,7 @@ docker build -t $user/poc:dev .
 - I have created docker image with name poc and tagged it as dev. you are free to use other names and tags
 
 ### Push docker image to AWS ECR (optional)
-- This step is optional and required only if you are using AWS EKS. 
+- This step is optional and required only if you are using AWS ECR to store docker images. 
 - In our case we are using AWS EKS for deploying our application hence it is needed for it.
 - steps for pushing docker image to ECR are available in AWS web console. for more information [refer](https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-push-ecr-image.html)
 
