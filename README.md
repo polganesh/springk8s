@@ -8,9 +8,11 @@ Althogh applications running on any K8s cluster can run on any k8s platforms e.g
 
 ## Prerequisite
 - Required
-  - Java 8 or above
-  - maven
-  - docker
+  - Git client :- to clone this project on local development environment.
+  - Java 8 or above :- for application development
+  - Maven :- build tool for this project. 
+  - Docker :- for creating docker image
+  - Helm :- helm client for deploying this application as a helm chart.
 - Optional
   - if using AWS EKS 
     - AWS account
