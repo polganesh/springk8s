@@ -13,9 +13,26 @@ Althogh applications running on any K8s cluster can run on any k8s platforms e.g
   - docker
 - Optional
   - if using AWS EKS 
+    - AWS account
     - AWS CLI :- to push docker image to AWS ECR
     - EKS cluster :- AWS k8s   
     - AWS IAM authenticator :- required for connecting AWS EKS cluster from local machine
     
 ## Steps
 ### Build java project
+
+```
+mvn clean install -DskipTests
+```
+it will create jar file in the _target_ folder of this project 
+
+### Build Docker image
+
+```
+docker build -t $user/poc:dev .
+```
+it will create docker image based on _Dockerfile_ present in this project.
+
+### 
+
+
