@@ -1,7 +1,7 @@
 # Readme
 
 ## Introduction
-This is simple __spring boot__ java project explain steps for running it on __k8s__ cluster. 
+This is simple __spring boot__ java project highlight steps for running it on __k8s__ cluster. 
 
 ## Capabilities of this project
 - Spring application deployed as a _K8s Deployment_ in K8s cluster
@@ -9,7 +9,7 @@ This is simple __spring boot__ java project explain steps for running it on __k8
   - Deploy application as single unit in k8s cluster
   - Rollback to earlier version 
 - Integration of other Helm charts as Sub Chart. it helps breaking application in small pieces. In current case we use _mongodb   helm chart_ from helm stable repository 
-- Use  k8s configmap and secret in Java Spring Boot application. 
+- Use  k8s configmap and secret in Java Spring Boot application. Please refer _com.poc.springk8s.MongoConfig_ and _deployment.yaml_ present inside helm chart of this project 
 
 ## Further Possible Improvements
 - Utilise Ingress to save cost
@@ -23,7 +23,7 @@ This documentation is mainly concentrate on how to deploy application on AWS EKS
 ## Prerequisite
 - Required
   - Git client :- to clone this project on local development environment.
-  - Java 8 or above :- for application development
+  - Java 8 or above :- for application development, compilation and build as jar file
   - Maven :- build tool for this project. 
   - Docker :- for creating docker image
   - Helm :- helm client for deploying this application as a helm chart.
