@@ -91,3 +91,73 @@ containers:
               containerPort: 8080
               protocol: TCP
 ```
+### Add mongodb helm chart as sub chart (required if we are using helm chart)
+- Add mongodb helm chart from (https://github.com/helm/charts/tree/master/stable/mongodb) in charts folder (i.e. helm-chart/springk8s/charts). for more information refer charts folder inside helm chart of this project
+- Add requirement.yaml file in helm chart (i.e. helm-chart/springk8s) of this project. it is helpful for pointing to location of helm chart of sub chart. for our application we are pointing to local file path
+
+```
+dependencies:
+- name: mongodb
+  version: "5.17.4"
+  repository: "file://charts/mongodb"
+```
+
+### Prepare Secret for Mongodb
+- Create secret file (Please note it is not part of helm chart).
+```
+apiVersion: v1
+kind: Secret
+metadata:
+  name: springk8s
+type: Opaque
+data:
+  mongodb-password: <64 bit encoded password for mongodb normal user>
+  mongodb-root-password: <64 bit encoded password for mongodb root user >
+```
+- apply this secret in k8s cluster with kubectl apply -f <secret file location>
+
+### Values for helm chart
+#### Main/Umbrella chart
+```
+mongodb:
+  tag: 4.0.9 
+  ## Enable authentication
+  ## ref: https://docs.mongodb.com/manual/tutorial/enable-authentication/
+  usePassword: true
+  pullPolicy: Always
+  existingSecret: springk8s
+  mongodbUsername: springk8s
+  mongodbDatabase: springk8s
+  ## Whether enable/disable IPv6 on MongoDB
+  ## ref: https://github.com/bitnami/bitnami-docker-mongodb/blob/master/README.md#enabling/disabling-ipv6
+  ##
+  mongodbEnableIPv6: true
+  resources: 
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+     cpu: 100m
+     memory: 256Mi
+  persistence:
+    enabled: true
+    storageClass: gp2
+    size: 8Gi
+  replicaSet:
+    ## Whether to create a MongoDB replica set for high availability or not
+    enabled: false
+    useHostnames: true
+    name: rs0
+    replicas:
+      secondary: 1
+      arbiter: 1
+  service:
+    type: ClusterIP
+```
+Important values for  subchart
+- mongodb.tag :- We are using mongo db version 4.0.9
+- mongodb.usePassword - will enable authentication
+- mongodb.mongodbUsername - non admin user name
+- mongodbDatabase - db name
+- existingSecret - name of secret containing admin and non admin password
+- mongodb.replicaSet.enabled - false indicates dont create secondary for DB
