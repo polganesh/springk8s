@@ -114,10 +114,9 @@ data:
   mongodb-password: <64 bit encoded password for mongodb normal user>
   mongodb-root-password: <64 bit encoded password for mongodb root user >
 ```
-- apply this secret in k8s cluster with kubectl apply -f <secret file location>
+- apply this secret in k8s cluster with kubectl apply -f _secret file location_
 
-### Values for helm chart
-#### Main/Umbrella chart
+### Values for sub chart( present in values.yaml of umbrella chart)
 ```
 mongodb:
   tag: 4.0.9 
@@ -161,3 +160,5 @@ Important values for  subchart
 - mongodbDatabase - db name
 - existingSecret - name of secret containing admin and non admin password
 - mongodb.replicaSet.enabled - false indicates dont create secondary for DB
+
+
