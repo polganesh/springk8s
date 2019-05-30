@@ -31,7 +31,7 @@ It will create jar file in the _target_ folder of this project
 ### Build Docker image
 
 ```
-docker build -t $user/poc:dev .
+docker build -t $USER/poc:dev .
 ```
 - It will create docker image based on _Dockerfile_ present in this project.
 - I have created docker image with name poc and tagged it as dev. you are free to use other names and tags
@@ -41,4 +41,41 @@ docker build -t $user/poc:dev .
 - In our case we are using AWS EKS for deploying our application hence it is needed for it.
 - steps for pushing docker image to ECR are available in AWS web console. for more information [refer](https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-push-ecr-image.html)
 
+### create default helm chart (optional)
+- This step is required if we are using helm chart for deploying our application  as helm chart.
+- Go to helm chart folder of this project and execute following command. Please note in following case our chart name is __springk8s__. we can provide any other name if needed.
+```
+helm create springk8s
+```
+- it will create default helm chart for any use case.
 
+### override values.yaml in helm (required if we are using helm chart)
+- for docker image
+  - in following case we are 
+	- pointing to our docker image present in AWS ECR
+	- for testing purpose we are using pullPolicy as _Always_
+```
+image:
+  repository: 228955010194.dkr.ecr.eu-central-1.amazonaws.com/poc
+  tag: latest
+  pullPolicy: Always
+```
+- for service
+  - we are using service type as _LoadBalancer_
+  - port we are using 8080
+```
+service:
+  type: LoadBalancer
+  port: 8080
+```
+- override port for container in deployment.yaml present in template folder
+```
+containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+```
