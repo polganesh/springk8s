@@ -164,4 +164,12 @@ Important values for  subchart
 - existingSecret - name of secret containing admin and non admin password
 - mongodb.replicaSet.enabled - false indicates dont create secondary for DB
 
+# How to deploy this application as a helm chart to k8s cluster ?
+- Please execute following command from the root location of this project.
+- If needed we need to change image tag defined in values.yaml of this project.
+```
+helm upgrade --install springk8s helm-chart/springk8s
+```
+
+
 
