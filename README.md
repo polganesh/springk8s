@@ -3,6 +3,17 @@
 ## Introduction
 This is simple __spring boot__ java project explain steps for running it on __k8s__ cluster. 
 
+## Capabilities of this project
+- Explain steps about how spring boot application can be deployed as a _K8s Deployment_ is K8s cluster
+- Explain how to create and use  Helm chart for custom application.
+- Integration of other Helm charts as Sub Chart. it helps breaking application in small pieces. in current case we use _mongodb   helm chart_ from helm stable repository 
+- Read  k8s configmap and secret
+
+## Further Possible Improvements
+- Utilise Ingress to save cost
+- Enable replication for Mongodb (primary ,secondary).
+- Use cron job like MGOB for taking backup of mongodb on secondary.
+
 ## Important Notes
 Althogh applications running on any K8s cluster can run on any k8s platforms e.g. Azure AKS, AWS EKS or other cloud providers like GCP, IBM Bluemix .... or on premises such as minikube but most of the explanation here in the context of deploying it on AWS EKS.
 
@@ -13,6 +24,7 @@ Althogh applications running on any K8s cluster can run on any k8s platforms e.g
   - Maven :- build tool for this project. 
   - Docker :- for creating docker image
   - Helm :- helm client for deploying this application as a helm chart.
+  - k8s cluster - for current scenario we are using EKS from Amazon.
 - Optional
   - if using AWS EKS 
     - AWS account
