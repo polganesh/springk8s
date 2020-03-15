@@ -5,9 +5,9 @@
 replicaCount: 1
 
 # please note for development env it is good idea to use pullPolicy as Always
-image:
-  repository: 228955010194.dkr.ecr.eu-central-1.amazonaws.com/poc
-  tag: 0.7
+image:  
+  repository: 113201469790.dkr.ecr.eu-central-1.amazonaws.com/poc
+  tag: 0.1
   pullPolicy: Always
 
 imagePullSecrets: []
