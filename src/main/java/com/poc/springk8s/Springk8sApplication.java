@@ -14,4 +14,5 @@ public class Springk8sApplication {
 		SpringApplication.run(Springk8sApplication.class, args);
 	}
 
+
 }

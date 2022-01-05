@@ -79,3 +79,50 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+#-----------------------------------
+# override values  for mongo db sub chart
+#-----------------------------------
+mongodb:
+  auth:
+    usernames: [ "springk8s"]
+    passwords: ["springk8s" ]
+    databases: ["springk8s" ]
+    #username: "springk8s"
+    #database: "springk8s"
+    #existingSecret:  "springk8s"
+#  tag: 4.0.9
+#  auth:
+  ## Enable authentication
+  ## ref: https://docs.mongodb.com/manual/tutorial/enable-authentication/
+#  usePassword: true
+#  pullPolicy: Always
+#  existingSecret: springk8s
+#  mongodbUsername: springk8s
+#  mongodbDatabase: springk8s
+#  ## Whether enable/disable IPv6 on MongoDB
+#  ## ref: https://github.com/bitnami/bitnami-docker-mongodb/blob/master/README.md#enabling/disabling-ipv6
+#  ##
+#  mongodbEnableIPv6: true
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+     cpu: 100m
+     memory: 256Mi
+  persistence:
+    enabled: true
+    storageClass: gp2
+    size: 8Gi
+  replicaSet:
+    ## Whether to create a MongoDB replica set for high availability or not
+    enabled: false
+    useHostnames: true
+    name: rs0
+    replicas:
+      secondary: 1
+      arbiter: 1
+  service:
+    type: ClusterIP
+

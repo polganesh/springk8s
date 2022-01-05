@@ -1,0 +1,4 @@
+dependencies:
+- name: mongodb
+  version: "10.30.8"
+  repository: "file://charts/mongodb"
