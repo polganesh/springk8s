@@ -39,17 +39,19 @@ This documentation is mainly concentrate on how to deploy application on AWS EKS
 ### Build java project
 
 ```
-mvn clean install -DskipTests
+mvn clean install -DskipTests -Dapp-jar-version=0.<commit-id>.SNAPSHOT
 ```
-It will create jar file in the _target_ folder of this project 
+It will create jar file in the _target_ folder of this project with name springk8s-0.<commit-id>.SNAPSHOT.jar
 
 ### Build Docker image
 
 ```
-docker build -t $USER/poc:dev .
+docker build --build-arg jar_location=target/springk8s-0.<commit-id>.SNAPSHOT.jar  -t $USER/poc:dev .
 ```
 - It will create docker image based on _Dockerfile_ present in this project.
 - I have created docker image with name poc and tagged it as dev. you are free to use other names and tags
+- One needs to provide jar file location in build arg. for more information refer jar_location.
+Please note we have provided exactly same jar name which we provided in earlier step 
 
 ### Push docker image to AWS ECR (optional)
 - This step is optional and required only if you are using AWS ECR to store docker images. 

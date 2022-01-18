@@ -11,7 +11,10 @@
 	</parent>
 	<groupId>com.poc</groupId>
 	<artifactId>springk8s</artifactId>
+	<!--
 	<version>0.0.1-SNAPSHOT</version>
+	-->
+	<version>${app-jar-version}</version>
 	<name>springk8s</name>
 	<description>Demo project for Spring Boot</description>
 
